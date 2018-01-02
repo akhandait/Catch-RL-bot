@@ -18,8 +18,8 @@ if resume:
 	model = pickle.load(open('save.p', 'rb'))
 else:
     model = {}
-    model['W1'] = np.random.randn(H, D) / np.sqrt(D)	
-    model['W2'] = np.random.randn(H) / np.sqrt(H)
+    model['W1'] = np.random.randn(H, D) * np.sqrt(2 / D) # He initialization
+    model['W2'] = np.random.randn(H) * np.sqrt(2 / H)
 
 grad_buffer = {k : np.zeros_like(v) for k,v in model.items()}
 rmsprop_cache = {k : np.zeros_like(v) for k,v in model.items()}    
