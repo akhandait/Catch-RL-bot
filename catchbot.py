@@ -4,7 +4,7 @@ import pickle
 
 #hyperparameters
 H = 200 #number of hidden layer neurons
-batch_size = 100 # after how many episodes to do a parameter update
+batch_size = 64 # after how many episodes to do a parameter update
 # define what is an episode 
 learning_rate = 1e-4 
 gamma = 0.99 # discount factor for reward
@@ -18,8 +18,9 @@ if resume:
 	model = pickle.load(open('save.p', 'rb'))
 else:
     model = {}
-    model['W1'] = np.random.randn(H, D) * np.sqrt(2 / D) # He initialization
-    model['W2'] = np.random.randn(H) * np.sqrt(2 / H)
+    # He Initialization for W1 and W2 
+    model['W1'] = np.random.randn(H, D) * np.sqrt(2 / D) 
+    model['W2'] = np.random.randn(H) * np.sqrt(2 / H) 
 
 grad_buffer = {k : np.zeros_like(v) for k,v in model.items()}
 rmsprop_cache = {k : np.zeros_like(v) for k,v in model.items()}    
